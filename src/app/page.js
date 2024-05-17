@@ -4,6 +4,50 @@ import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Table
 import {useEffect, useState} from "react";
 import { useHotkeys } from '@mantine/hooks';
 
+/**
+ * @description Creates a HTML page that displays the Toronto Blue Jays roster, stats,
+ * and team scores. It uses React hooks to handle state and provides an interactive
+ * layout for the user.
+ * 
+ * @returns { HTML element, which is a container for various HTML content including
+ * images, tables, h1 headings, etc } a React component that displays a baseball
+ * scorecard with team and player statistics.
+ * 
+ * 	1/ `div`: This element is a container for other HTML elements. It has a class of
+ * `flex` and flexbox layout is applied to it.
+ * 	2/ `w-full`: This class sets the width of the `Table` element to 100%.
+ * 	3/ `border-y-2`: This class adds a border of size 2 pixels to the vertical edge
+ * of the `TableHeader` element.
+ * 	4/ `TableRow`: This element represents a row in the table. It has two classes:
+ * `table-head` and `border-y-2`. The `table-head` class adds a horizontal rule to
+ * the row, while the `border-y-2` class adds a border of size 2 pixels to the vertical
+ * edge of the row.
+ * 	5/ `TableHead`: This element represents the header of the table. It has two
+ * classes: `text-right` and `border-y-white`. The `text-right` class aligns the text
+ * to the right, while the `border-y-white` class adds a border of size 2 pixels to
+ * the vertical edge of the header.
+ * 	6/ `<img>` elements: These elements represent images displayed in the table. They
+ * have the `src` attribute set to the image path and the `alt` attribute set to the
+ * team name.
+ * 	7/ `<h1>` elements: These elements represent the team names displayed in the
+ * table. They have the `text-3xl` class applied to them, which sets the font size
+ * to 3 times the default size.
+ * 	8/ `<TableCell>` elements: These elements represent cells in the table. They have
+ * the `text-7xl` class applied to them, which sets the font size to 7 times the
+ * default size.
+ * 	9/ `<TableBody>` element: This element represents the body of the table. It
+ * contains the data rows displayed in the table.
+ * 	10/ `<div>` elements: These elements represent additional HTML content displayed
+ * outside the table. They have the `w-1/3` class applied to them, which sets their
+ * width to 1/3 of the parent container.
+ * 
+ * 	In summary, the `Home` function returns an HTML element that contains a table
+ * with team names and data, along with additional content outside the table.
+ */
+/**
+ * @description Makes an HTTP GET request to `http://statsapi.mlb.com/api/v1/schedule/games/`
+ * with the sport Id 1, and logs the response text to the console.
+ */
 export default function Home() {
 
 
@@ -187,6 +231,21 @@ export default function Home() {
 
 
 
+    /**
+     * @description Creates a HTML div element with classnames `.flex` and `.justify-between`
+     * to align the text horizontally. It also uses the `position` prop to display a title
+     * for each player, followed by their name and average score.
+     * 
+     * @param { object } props - 3 properties (position, name, and avg) that are used to
+     * generate the output HTML markup.
+     * 
+     * @returns { HTML div element } a set of three headings, each containing the relevant
+     * information for that heading.
+     * 
+     * 		- `position`: A string representing the position of the player.
+     * 		- `name`: A string representing the name of the player.
+     * 		- `avg`: A number representing the average rating of the player.
+     */
     const Player = (props) => {
         return (
             <div className={"flex justify-between px-10"}>
@@ -309,6 +368,11 @@ export default function Home() {
                            <TableHead className={"text-blue-300"}>E</TableHead>
                        </TableRow>
                    </TableHeader>
+                   {/**
+                    * @description Takes an array of stats objects and returns a table with columns for
+                    * team name, player statistic names (i1-i9), number of runs, hits, errors, and a
+                    * total column for each statistic.
+                    */}
                    <TableBody>
                        {stats.map((s, i) => (
                            <TableRow key={s.team}>
